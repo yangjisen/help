@@ -85,3 +85,27 @@
 ##### 忽略本地文件,不影响其他人
 * 忽略文件 ``` git update-index --assume-unchanged /path/file ```
 * 取消忽略 ``` git update-index -–no-assume-unchanged /path/file ```
+
+##### 清除大文件
+* 统计超过1M的文件
+```
+git rev-list --objects --all \
+| git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' \
+| sed -n 's/^blob //p' \
+| sort --numeric-sort --key=2 \
+| cut -c 1-12,41- \
+| grep -vF --file=<(git ls-tree -r HEAD | awk '{print $3}') \
+| awk '$2 > 1048576' \
+| $(command -v gnumfmt || echo numfmt) --field=2 --to=iec-i --suffix=B --padding=7 --round=nearest
+```
+* 删除文件
+```
+git filter-branch --force --index-filter 'git rm -rf --cached --ignore-unmatch <filename>' --prune-empty --tag-name-filter cat -- --all
+```
+* 回收垃圾
+```
+rm -rf .git/refs/original/
+git reflog expire --expire=now --all
+git gc --prune=now
+```
+
