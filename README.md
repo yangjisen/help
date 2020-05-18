@@ -100,7 +100,8 @@ git rev-list --objects --all \
 ```
 * 删除文件
 ```
-git filter-branch --force --index-filter 'git rm -rf --cached --ignore-unmatch <filename>' --prune-empty --tag-name-filter cat -- --all
+git filter-branch --force --index-filter 'git rm -rf --cached --ignore-unmatch <filename>' \
+| --prune-empty --tag-name-filter cat -- --all
 ```
 * 回收垃圾
 ```
