@@ -8,9 +8,10 @@
 * 合并分支 ``` git merge <name> ```
 * 恢复工作区
     1. 查看工作区 ``` git stash list ```
-    1. 不删除stash ``` git stash apply stash@{0} ```
+    1. 不删除stash ``` git stash apply stash@{index} ```
     1. 删除stash  ```  git stash drop ```
     1. 恢复并删除stash ``` git stash pop ```
+    1. 查看stash改动 ``` git stash show stash@{index} ```
 
 ##### 回退版本
 * 回退到上一个版本  ``` git reset --hard HEAD^ ```
