@@ -59,6 +59,11 @@
 * 推送分支  ``` git push origin <name> ```
 * 关联分支  ``` git branch --set-upstream-to=origin/<remotename> <localname> ```
 
+* 合并分支不生成merge记录
+    1. ```git pull --rebase```
+    1. 解决冲突 ```git rebase –continue```
+    1. 忽略冲突 ```git rebase –skip```
+
 ##### 标签管理
 * 创建标签
     1. 当前创建 ``` git tag <tagname> ```
